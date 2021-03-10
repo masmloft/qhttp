@@ -1,0 +1,24 @@
+#ifndef QT_PH_H
+#define QT_PH_H
+
+#if defined __cplusplus
+
+#ifdef QT_CORE_LIB
+# include <QtCore>
+#endif
+
+#ifdef QT_GUI_LIB
+# include <QtGui>
+#endif
+
+#ifdef QT_NETWORK_LIB
+# include <QtNetwork>
+#endif
+
+#ifdef QT_OPENGL_LIB
+# include <QtOpenGL>
+#endif
+
+#endif // __cplusplus
+
+#endif // QT_PH_H
