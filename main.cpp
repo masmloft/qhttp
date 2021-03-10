@@ -9,7 +9,7 @@
 #include <QDebug>
 #include <QDir>
 
-#include "TcmuServer.h"
+#include "WebServer.h"
 
 #ifndef _WIN64
 class CleanExit : public QObject
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 	httpServerCfg.port = 81;
 	//httpServerCfg.sharePath = "e:/share";
 	httpServerCfg.sharePath = QCoreApplication::applicationDirPath();
-	TcmuServer tcmuServer(httpServerCfg);
+	WebServer webServer(httpServerCfg);
 
 	int ret = a.exec();
 
