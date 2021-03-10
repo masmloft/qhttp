@@ -23,7 +23,24 @@ WebServer::WebServer(const HttpServerCfg& httpServerCfg)
 		{
 			Json json;
 			json.append("time", QDateTime::currentDateTime().toMSecsSinceEpoch());
-			json.append("temperature", _hardData.temperature);
+			json.append("temperature", _dataModel.hard.temperature);
+
+			PageApplicationJson page(httpSocket);
+			page.httpResponse() << json.toUtf8();
+			return true;
+		};
+	}
+
+	{
+		_httpServer.pageFuncMap["/API/SESSION"] = [this](HttpSocket& httpSocket) -> bool
+		{
+			Json json;
+			json.append("end", _dataModel.session.end);
+			json.append("finished", _dataModel.session.finished);
+			json.append("id", _dataModel.session.id);
+			json.append("running", _dataModel.session.running);
+			json.append("start", _dataModel.session.start);
+			json.append("timer", _dataModel.session.timer);
 
 			PageApplicationJson page(httpSocket);
 			page.httpResponse() << json.toUtf8();
@@ -36,5 +53,5 @@ WebServer::WebServer(const HttpServerCfg& httpServerCfg)
 
 void WebServer::timerEvent( QTimerEvent* event )
 {
-	_hardData.temperature = (double)(qrand() % 400) / 10;
+	_dataModel.hard.temperature = (double)(qrand() % 400) / 10;
 }
