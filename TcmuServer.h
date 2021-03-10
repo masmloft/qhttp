@@ -8,6 +8,12 @@
 
 #include "./HttpServer/HttpServer.h"
 
+class HardData
+{
+public:
+	double temperature = 0;
+};
+
 class TcmuServer : public QObject
 {
 public:
@@ -19,6 +25,7 @@ private:
 //	using PageFuncMap = std::map<QByteArray, PageFunc>;
 private:
 	HttpServer _httpServer;
+	HardData _hardData;
 //	PageFuncMap _pageFuncMap;
 private:
 	bool reqPage(HttpSocket& httpSocket);

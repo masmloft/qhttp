@@ -4,38 +4,13 @@
 
 <meta charset="utf-8" />
 <title></title>
+
 <script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="home.js"></script>
+
 <link rel="stylesheet" type="text/css" href="app.css">
 
 <script>
-    function timeToString(inDate) {
-        let dateStr = null;
-        let timeStr = null;
-        if (inDate) {
-            const zero = inDate.getMinutes() < 10 ? '0' : '';
-            const sZero = inDate.getSeconds() < 10 ? '0' : '';
-            dateStr = inDate.toLocaleDateString();
-            timeStr = inDate.getHours() + ':' + zero + inDate.getMinutes() + ':' + sZero + inDate.getSeconds();
-        }
-        return { date: dateStr, time: timeStr, all: inDate ? dateStr + ' ' + timeStr : null };
-    }
-
-    const reqTime = function() {
-        $.getJSON("/api/time")
-            .done(function( json ) {
-                const dts = timeToString(new Date(json.time));
-                $("#DateView").text(dts.date);
-                $("#TimeView").text(dts.time);
-            })
-            .fail(function( jqxhr, textStatus, error ) {
-                 var err = textStatus + ', ' + error;
-                 console.log( "Request Failed: " + err);
-            });
-    }
-
-    $(document).ready(function () {
-        setInterval(reqTime, 1000);
-    });
 </script>
 
 </head>
@@ -44,186 +19,189 @@
 
 <noscript>You need to enable JavaScript to run this app.
 </noscript>
+
 <div id="root">
+    <div class="app mb-5">
+        <header class="header">
+            <button type="button" class="btn btn-link">
+<!--	        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home" class="svg-inline--fa fa-home fa-w-18 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg>-->
+                Главная
+            </button>
+            <button type="button" class="btn btn-link">
+                <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="wrench" class="svg-inline--fa fa-wrench fa-w-16 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M507.73 109.1c-2.24-9.03-13.54-12.09-20.12-5.51l-74.36 74.36-67.88-11.31-11.31-67.88 74.36-74.36c6.62-6.62 3.43-17.9-5.66-20.16-47.38-11.74-99.55.91-136.58 37.93-39.64 39.64-50.55 97.1-34.05 147.2L18.74 402.76c-24.99 24.99-24.99 65.51 0 90.5 24.99 24.99 65.51 24.99 90.5 0l213.21-213.21c50.12 16.71 107.47 5.68 147.37-34.22 37.07-37.07 49.7-89.32 37.91-136.73zM64 472c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z"></path></svg>-->
+                Настройки
+            </button>
+            <button type="button" class="btn btn-link">
+                <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="video" class="svg-inline--fa fa-video fa-w-18 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"></path></svg>-->
+                Видео
+            </button>
+        </header>
 
-<div class="app mb-5">
+        <div class="container">
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header">
+                        <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm57.1 350.1L224.9 294c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12v137.7l63.5 46.2c5.4 3.9 6.5 11.4 2.6 16.8l-28.2 38.8c-3.9 5.3-11.4 6.5-16.8 2.6z"></path></svg>-->
+                        <span class="ml-2">Дата и время</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <div>
+                                <span><strong>Дата:</strong></span>
+                                <span id="DateView" class="ml-2">-</span>
+                            </div>
+                            <div>
+                                <span><strong>Время:</strong></span>
+                                <span id="TimeView" class="ml-2">-</span>
+                            </div>
+                        </p>
+                    </div>
+                </div>
 
-<header class="header">
-<button type="button" class="btn btn-link">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home" class="svg-inline--fa fa-home fa-w-18 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path></svg>-->
-Главная
-</button>
-<button type="button" class="btn btn-link">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="wrench" class="svg-inline--fa fa-wrench fa-w-16 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M507.73 109.1c-2.24-9.03-13.54-12.09-20.12-5.51l-74.36 74.36-67.88-11.31-11.31-67.88 74.36-74.36c6.62-6.62 3.43-17.9-5.66-20.16-47.38-11.74-99.55.91-136.58 37.93-39.64 39.64-50.55 97.1-34.05 147.2L18.74 402.76c-24.99 24.99-24.99 65.51 0 90.5 24.99 24.99 65.51 24.99 90.5 0l213.21-213.21c50.12 16.71 107.47 5.68 147.37-34.22 37.07-37.07 49.7-89.32 37.91-136.73zM64 472c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z"></path></svg>-->
-Настройки
-</button>
-<button type="button" class="btn btn-link">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="video" class="svg-inline--fa fa-video fa-w-18 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"></path></svg>-->
-Видео
-</button>
-</header>
+                <div class="card">
+                    <div class="card-header">
+                        <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="thermometer-half" class="svg-inline--fa fa-thermometer-half fa-w-8 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M192 384c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-23.685 12.876-44.349 32-55.417V224c0-17.673 14.327-32 32-32s32 14.327 32 32v104.583c19.124 11.068 32 31.732 32 55.417zm32-84.653c19.912 22.563 32 52.194 32 84.653 0 70.696-57.303 128-128 128-.299 0-.609-.001-.909-.003C56.789 511.509-.357 453.636.002 383.333.166 351.135 12.225 321.755 32 299.347V96c0-53.019 42.981-96 96-96s96 42.981 96 96v203.347zM208 384c0-34.339-19.37-52.19-32-66.502V96c0-26.467-21.533-48-48-48S80 69.533 80 96v221.498c-12.732 14.428-31.825 32.1-31.999 66.08-.224 43.876 35.563 80.116 79.423 80.42L128 464c44.112 0 80-35.888 80-80z"></path></svg>-->
+                        <span class="ml-2">Температура</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <div>
+                                <span><strong>Температура:</strong></span>
+                                <span id="TemperatureView" class="ml-2">0</span>
+                            </div>
+                        </p>
+                    </div>
+                </div>
 
-<div class="container">
-<div class="card-deck">
-<div class="card">
-<div class="card-header">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm57.1 350.1L224.9 294c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12v137.7l63.5 46.2c5.4 3.9 6.5 11.4 2.6 16.8l-28.2 38.8c-3.9 5.3-11.4 6.5-16.8 2.6z"></path></svg>-->
-<span class="ml-2">Дата и время
-</span>
-</div>
-<div class="card-body">
-<p class="card-text">
-<div>
-<span><strong>Дата:</strong></span>
-<span id="DateView" class="ml-2">-</span>
-</div>
-<div>
-<span><strong>Время:</strong></span>
-<span id="TimeView" class="ml-2">-</span>
-</div>
-</p>
-</div>
-</div>
-<div class="card">
-<div class="card-header">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="thermometer-half" class="svg-inline--fa fa-thermometer-half fa-w-8 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M192 384c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-23.685 12.876-44.349 32-55.417V224c0-17.673 14.327-32 32-32s32 14.327 32 32v104.583c19.124 11.068 32 31.732 32 55.417zm32-84.653c19.912 22.563 32 52.194 32 84.653 0 70.696-57.303 128-128 128-.299 0-.609-.001-.909-.003C56.789 511.509-.357 453.636.002 383.333.166 351.135 12.225 321.755 32 299.347V96c0-53.019 42.981-96 96-96s96 42.981 96 96v203.347zM208 384c0-34.339-19.37-52.19-32-66.502V96c0-26.467-21.533-48-48-48S80 69.533 80 96v221.498c-12.732 14.428-31.825 32.1-31.999 66.08-.224 43.876 35.563 80.116 79.423 80.42L128 464c44.112 0 80-35.888 80-80z"></path></svg>-->
-<span class="ml-2">Температура
-</span>
-</div>
-<div class="card-body"><p class="card-text">
-<div ><span><strong>Температура:
-</strong>
-</span><span class="ml-2">0
-</span>
-</div>
-</p>
-</div>
-</div>
-<div class="card">
-<div class="card-header">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="desktop" class="svg-inline--fa fa-desktop fa-w-18 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"></path></svg>-->
-<span class="ml-2">Управление сессией
-</span>
-</div>
-<div class="card-body"><p class="card-text">
-<div ><span><strong>Старт:
-</strong>
-</span><span class="ml-2">
-</span>
-</div>
-<div ><span><strong>Стоп:
-</strong>
-</span><span class="ml-2">
-</span>
-</div>
-<div ><span><strong>Таймер сессии:
-</strong>
-</span><span class="ml-2">0
-</span>
-</div>
-<div ><span><strong>Завершено:
-</strong>
-</span><span class="ml-2">
-<div class="react-toggle react-toggle--disabled">
-<div class="react-toggle-track">
-<div class="react-toggle-track-check">
-<!--<svg width="14" height="11" viewBox="0 0 14 11"><title>switch-check</title><path d="M11.264 0L5.26 6.004 2.103 2.847 0 4.95l5.26 5.26 8.108-8.107L11.264 0" fill="#fff" fill-rule="evenodd"></path></svg>-->
-</div>
-<div class="react-toggle-track-x">
-<!--<svg width="10" height="10" viewBox="0 0 10 10"><title>switch-x</title><path d="M9.9 2.12L7.78 0 4.95 2.828 2.12 0 0 2.12l2.83 2.83L0 7.776 2.123 9.9 4.95 7.07 7.78 9.9 9.9 7.776 7.072 4.95 9.9 2.12" fill="#fff" fill-rule="evenodd"></path></svg>-->
-</div>
-</div>
-<div class="react-toggle-thumb">
-</div><input disabled="" class="react-toggle-screenreader-only" type="checkbox">
-</div>
-</span>
-</div>
-<div ><span><strong>Работает:
-</strong>
-</span><span class="ml-2">
-<div class="react-toggle react-toggle--disabled">
-<div class="react-toggle-track">
-<div class="react-toggle-track-check">
-<!--<svg width="14" height="11" viewBox="0 0 14 11"><title>switch-check</title><path d="M11.264 0L5.26 6.004 2.103 2.847 0 4.95l5.26 5.26 8.108-8.107L11.264 0" fill="#fff" fill-rule="evenodd"></path></svg>-->
-</div>
-<div class="react-toggle-track-x">
-<!--<svg width="10" height="10" viewBox="0 0 10 10"><title>switch-x</title><path d="M9.9 2.12L7.78 0 4.95 2.828 2.12 0 0 2.12l2.83 2.83L0 7.776 2.123 9.9 4.95 7.07 7.78 9.9 9.9 7.776 7.072 4.95 9.9 2.12" fill="#fff" fill-rule="evenodd"></path></svg>-->
-</div>
-</div>
-<div class="react-toggle-thumb">
-</div><input disabled="" class="react-toggle-screenreader-only" type="checkbox">
-</div>
-</span>
-</div>
-<div ><span><strong>Сессия:
-</strong>
-</span><span class="ml-2"><button type="button" class="btn btn-primary">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play-circle" class="svg-inline--fa fa-play-circle fa-w-16 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z"></path></svg>-->
-Старт
-</button>
-</span>
-</div>
-</p>
-</div>
-</div>
-</div>
-<div class="mt-4 card-deck">
-<div class="card">
-<div class="card-header">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="music" class="svg-inline--fa fa-music fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M511.99 32.01c0-21.71-21.1-37.01-41.6-30.51L150.4 96c-13.3 4.2-22.4 16.5-22.4 30.5v261.42c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64V214.31l256-75.02v184.63c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64l-.01-351.99z"></path></svg>-->
-<span class="ml-2">Управление стартовой музыкой
-</span>
-</div>
-<div class="card-body"><p class="card-text">
-<div ><span><strong>Текущая музыка:
-</strong>
-</span><span class="ml-2">Пусто
-</span>
-</div><ul class="playlist nav flex-column">
-</ul>
-</p>
-</div>
-</div>
-<div class="card">
-<div class="card-header">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="music" class="svg-inline--fa fa-music fa-w-16 mr-2" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M511.99 32.01c0-21.71-21.1-37.01-41.6-30.51L150.4 96c-13.3 4.2-22.4 16.5-22.4 30.5v261.42c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64V214.31l256-75.02v184.63c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64l-.01-351.99z"></path></svg>-->
-Музыка
-</div>
-<div class="card-body">
-<div class="text-center"><h4 class="text-primary">Не играет
-</h4>
-</div>
-<div class="d-flex">
-<div class="d-flex w-25 align-self-center mr-5">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="volume-up" class="svg-inline--fa fa-volume-up fa-w-18 mr-3" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95-7.34 11.17-4.22 26.18 6.95 33.51 66.27 43.49 105.82 116.6 105.82 195.58 0 78.98-39.55 152.09-105.82 195.58-11.17 7.32-14.29 22.34-6.95 33.5 7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36 6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81-11.61 6.41-15.84 21-9.45 32.61 6.43 11.66 21.05 15.8 32.61 9.45 28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"></path></svg>-->
-<div class="rc-slider">
-<div class="rc-slider-rail">
-</div>
-<div class="rc-slider-track" style="left: 0%; width: 0%;">
-</div>
-<div class="rc-slider-step">
-</div>
-<div tabindex="0" class="rc-slider-handle" style="left: 0%;" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-disabled="false">
-</div>
-<div class="rc-slider-mark">
-</div>
-</div>
-</div>
-<div class="text-center"><button type="button" class="border border-primary mr-1 btn btn-light">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="step-backward" class="svg-inline--fa fa-step-backward fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M64 468V44c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12v176.4l195.5-181C352.1 22.3 384 36.6 384 64v384c0 27.4-31.9 41.7-52.5 24.6L136 292.7V468c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12z"></path></svg>-->
-</button><button type="button" class="border border-primary mr-1 btn btn-light">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play" class="svg-inline--fa fa-play fa-w-14 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>-->
-</button><button type="button" class="border border-primary mr-1 btn btn-light">
-<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="step-forward" class="svg-inline--fa fa-step-forward fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M384 44v424c0 6.6-5.4 12-12 12h-48c-6.6 0-12-5.4-12-12V291.6l-195.5 181C95.9 489.7 64 475.4 64 448V64c0-27.4 31.9-41.7 52.5-24.6L312 219.3V44c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12z"></path></svg>-->
-</button>
-</div>
-</div><hr><ul class="playlist nav flex-column">
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
+                <div class="card">
+                    <div class="card-header">
+                        <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="desktop" class="svg-inline--fa fa-desktop fa-w-18 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192l-16 48h-72c-13.3 0-24 10.7-24 24s10.7 24 24 24h272c13.3 0 24-10.7 24-24s-10.7-24-24-24h-72l-16-48h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-16 352H64V64h448v288z"></path></svg>-->
+                        <span class="ml-2">Управление сессией</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <div>
+                                <span><strong>Старт:</strong></span>
+                                <span class="ml-2"></span>
+                            </div>
+                            <div>
+                                <span><strong>Стоп:</strong></span>
+                                <span class="ml-2"></span>
+                            </div>
+                            <div>
+                                <span><strong>Таймер сессии:</strong></span>
+                                <span class="ml-2">0</span>
+                            </div>
+                            <div>
+                                <span><strong>Завершено:</strong></span>
+                                <span class="ml-2">
+                                    <div class="react-toggle react-toggle--disabled">
+                                        <div class="react-toggle-track">
+                                            <div class="react-toggle-track-check">
+                                                <!--<svg width="14" height="11" viewBox="0 0 14 11"><title>switch-check</title><path d="M11.264 0L5.26 6.004 2.103 2.847 0 4.95l5.26 5.26 8.108-8.107L11.264 0" fill="#fff" fill-rule="evenodd"></path></svg>-->
+                                            </div>
+                                            <div class="react-toggle-track-x">
+                                                <!--<svg width="10" height="10" viewBox="0 0 10 10"><title>switch-x</title><path d="M9.9 2.12L7.78 0 4.95 2.828 2.12 0 0 2.12l2.83 2.83L0 7.776 2.123 9.9 4.95 7.07 7.78 9.9 9.9 7.776 7.072 4.95 9.9 2.12" fill="#fff" fill-rule="evenodd"></path></svg>-->
+                                            </div>
+                                        </div>
+                                        <div class="react-toggle-thumb"></div>
+                                        <input disabled="" class="react-toggle-screenreader-only" type="checkbox">
+                                    </div>
+                                </span>
+                            </div>
+                            <div>
+                                <span><strong>Работает:</strong></span>
+                                <span class="ml-2">
+                                    <div class="react-toggle react-toggle--disabled">
+                                        <div class="react-toggle-track">
+                                            <div class="react-toggle-track-check">
+                                                <!--<svg width="14" height="11" viewBox="0 0 14 11"><title>switch-check</title><path d="M11.264 0L5.26 6.004 2.103 2.847 0 4.95l5.26 5.26 8.108-8.107L11.264 0" fill="#fff" fill-rule="evenodd"></path></svg>-->
+                                            </div>
+                                            <div class="react-toggle-track-x">
+                                                <!--<svg width="10" height="10" viewBox="0 0 10 10"><title>switch-x</title><path d="M9.9 2.12L7.78 0 4.95 2.828 2.12 0 0 2.12l2.83 2.83L0 7.776 2.123 9.9 4.95 7.07 7.78 9.9 9.9 7.776 7.072 4.95 9.9 2.12" fill="#fff" fill-rule="evenodd"></path></svg>-->
+                                            </div>
+                                        </div>
+                                        <div class="react-toggle-thumb">
+                                        </div>
+                                        <input disabled="" class="react-toggle-screenreader-only" type="checkbox">
+                                    </div>
+                                </span>
+                            </div>
+                            <div>
+                                <span><strong>Сессия:</strong></span>
+                                <span class="ml-2">
+                                    <button type="button" class="btn btn-primary">
+                                        <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play-circle" class="svg-inline--fa fa-play-circle fa-w-16 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z"></path></svg>-->
+                                        Старт
+                                    </button>
+                                </span>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 card-deck">
+                <div class="card">
+                    <div class="card-header">
+                        <!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="music" class="svg-inline--fa fa-music fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M511.99 32.01c0-21.71-21.1-37.01-41.6-30.51L150.4 96c-13.3 4.2-22.4 16.5-22.4 30.5v261.42c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64V214.31l256-75.02v184.63c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64l-.01-351.99z"></path></svg>-->
+                        <span class="ml-2">Управление стартовой музыкой</span>
+                    </div>
+                    <div class="card-body">
+                    <p class="card-text">
+                        <div>
+                            <span><strong>Текущая музыка:</strong></span>
+                            <span class="ml-2">Пусто</span>
+                        </div>
+                        <ul class="playlist nav flex-column">
+                        </ul>
+                    </p>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="music" class="svg-inline--fa fa-music fa-w-16 mr-2" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M511.99 32.01c0-21.71-21.1-37.01-41.6-30.51L150.4 96c-13.3 4.2-22.4 16.5-22.4 30.5v261.42c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64V214.31l256-75.02v184.63c-10.05-2.38-20.72-3.92-32-3.92-53.02 0-96 28.65-96 64s42.98 64 96 64 96-28.65 96-64l-.01-351.99z"></path></svg>-->
+						Музыка
+					</div>
+					<div class="card-body">
+						<div class="text-center">
+							<h4 class="text-primary">Не играет</h4>
+						</div>
+						<div class="d-flex">
+							<div class="d-flex w-25 align-self-center mr-5">
+								<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="volume-up" class="svg-inline--fa fa-volume-up fa-w-18 mr-3" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95-7.34 11.17-4.22 26.18 6.95 33.51 66.27 43.49 105.82 116.6 105.82 195.58 0 78.98-39.55 152.09-105.82 195.58-11.17 7.32-14.29 22.34-6.95 33.5 7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36 6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81-11.61 6.41-15.84 21-9.45 32.61 6.43 11.66 21.05 15.8 32.61 9.45 28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"></path></svg>-->
+								<div class="rc-slider">
+									<div class="rc-slider-rail">
+									</div>
+									<div class="rc-slider-track" style="left: 0%; width: 0%;">
+									</div>
+									<div class="rc-slider-step">
+									</div>
+									<div tabindex="0" class="rc-slider-handle" style="left: 0%;" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-disabled="false">
+									</div>
+									<div class="rc-slider-mark">
+									</div>
+								</div>
+							</div>
+							<div class="text-center">
+								<button type="button" class="border border-primary mr-1 btn btn-light">
+									<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="step-backward" class="svg-inline--fa fa-step-backward fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M64 468V44c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12v176.4l195.5-181C352.1 22.3 384 36.6 384 64v384c0 27.4-31.9 41.7-52.5 24.6L136 292.7V468c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12z"></path></svg>-->
+								</button>
+								<button type="button" class="border border-primary mr-1 btn btn-light">
+									<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play" class="svg-inline--fa fa-play fa-w-14 mr-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>-->
+								</button>
+								<button type="button" class="border border-primary mr-1 btn btn-light">
+									<!--<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="step-forward" class="svg-inline--fa fa-step-forward fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M384 44v424c0 6.6-5.4 12-12 12h-48c-6.6 0-12-5.4-12-12V291.6l-195.5 181C95.9 489.7 64 475.4 64 448V64c0-27.4 31.9-41.7 52.5-24.6L312 219.3V44c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12z"></path></svg>-->
+								</button>
+							</div>
+						</div>
+						<hr>
+						<ul class="playlist nav flex-column">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 
